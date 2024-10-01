@@ -1,14 +1,4 @@
-import {
-  Box,
-  Flex,
-  IconButton,
-  Text,
-  Avatar,
-  Input,
-  HStack,
-  VStack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Flex, Text, Spacer } from "@chakra-ui/react";
 import { ChatMessage } from "../types/types";
 import formatDate from "../utils/formatDate";
 import ChatOtherComponent from "./ChatOtherComponent";
