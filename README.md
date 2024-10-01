@@ -3,7 +3,7 @@
 Welcome to the **PWA Chat App**! This mini-project is built to demonstrate the power of Progressive Web Apps (PWA) using the blazing-fast **Vite** as a build tool. The app allows users to scroll through chats with smooth pagination and includes metadata from the API, making the entire chat experience dynamic and engaging. Moreover, it works offline as a PWA with installable capabilities! 🎉
 
 ## Live Version
-[PWA Chat App](https://coriderassignment-anant.vercel.app/)
+[PWA Chat App](https://coriderassignment-anant.vercel.app/) **(ONLY FOR MOBILE)**
 
 ## ✨ Features
 
