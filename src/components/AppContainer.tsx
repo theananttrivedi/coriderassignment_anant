@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from "@chakra-ui/react";
+import { Box, Flex, Spacer, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { ChatMessage, ChatMetadataFirstTime } from "../types/types";
@@ -86,6 +86,7 @@ const AppContainer = () => {
       <Box flex="1" overflowY="auto" p="4" ref={chatContainerRef}>
         <VStack spacing={4} align="stretch">
           <ChatArea chats={chats} />
+          <Spacer h={24} />
         </VStack>
       </Box>
       <Footer />

@@ -30,7 +30,7 @@ function Topbar({ chatMetadata }: { chatMetadata: ChatMetadataFirstTime }) {
         justify="space-between"
         ml={1}
         mr={2}
-        mt={12}
+        mt={8}
       >
         <HStack alignItems={"center"}>
           <IconButton
