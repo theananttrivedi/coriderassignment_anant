@@ -110,6 +110,7 @@ function Topbar({ chatMetadata }: { chatMetadata: ChatMetadataFirstTime }) {
               right="0"
               rounded={"8px"}
               width="180px"
+              shadow="md"
             >
               <HStack
                 spacing={3}
