@@ -114,6 +114,20 @@ function ChatOtherComponent({
   );
 }
 
+const formatDate = (dateString: string | number | Date) => {
+  const date = new Date(dateString);
+
+  // Get day, month, and year
+  const day = date.getDate();
+  const month = date
+    .toLocaleString("default", { month: "short" })
+    .toUpperCase();
+  const year = date.getFullYear();
+
+  // Return formatted date
+  return `${day} ${month}, ${year}`;
+};
+
 const App = () => {
   const [chats, setChats] = useState<ChatMessage[]>([]); // Store chat messages
   const [chatMetadata, setChatMetadata] = useState<ChatMetadataFirstTime>({
@@ -176,6 +190,9 @@ const App = () => {
       container?.removeEventListener("scroll", handleScroll);
     };
   }, [page]);
+
+  let previousDate: string | null = null;
+  let showDateComponent = false;
 
   return (
     <Flex
@@ -261,40 +278,85 @@ const App = () => {
 
       <Box flex="1" overflowY="auto" p="4" ref={chatContainerRef}>
         <VStack spacing={4} align="stretch">
-          <Flex
-            position="relative"
-            justify="center"
-            borderBottom="1px"
-            color="#B7B7B7"
-            height="16px"
-          >
-            <Text
-              position="absolute"
-              height="fit-content"
-              top="4px"
-              px={4}
-              backgroundColor="#FAF9F4"
-              color="#b7b7b7"
-              fontSize="14px"
-              fontWeight="medium"
-            >
-              12 JAN, 2024
-            </Text>
-          </Flex>
-          <Spacer mb={4} />
-
           {chats.map((chatItem, _) => {
+            showDateComponent = false;
+            const currentDate = chatItem.time.split(" ")[0];
+
+            // Compare the currentDate with the previousDate to detect a change
+            if (previousDate !== currentDate) {
+              previousDate = currentDate; // Update previousDate to the current one
+              showDateComponent = true; // Date has changed, show the date component
+            }
+
             if (chatItem.sender.self) {
               return (
-                <ChatSelfComponent key={chatItem.id} text={chatItem.message} />
+                <>
+                  {showDateComponent && (
+                    <>
+                      <Flex
+                        position="relative"
+                        justify="center"
+                        borderBottom="1px"
+                        color="#B7B7B7"
+                        height="16px"
+                      >
+                        <Text
+                          position="absolute"
+                          height="fit-content"
+                          top="4px"
+                          px={4}
+                          backgroundColor="#FAF9F4"
+                          color="#b7b7b7"
+                          fontSize="14px"
+                          fontWeight="medium"
+                        >
+                          12 JAN, 2024
+                        </Text>
+                      </Flex>
+                      <Spacer mb={4} />
+                    </>
+                  )}
+
+                  <ChatSelfComponent
+                    key={chatItem.id}
+                    text={chatItem.message}
+                  />
+                </>
               );
             }
             return (
-              <ChatOtherComponent
-                key={chatItem.id}
-                imageItem={chatItem.sender.image}
-                text={chatItem.message}
-              />
+              <>
+                {showDateComponent && (
+                  <>
+                    <Flex
+                      position="relative"
+                      justify="center"
+                      borderBottom="1px"
+                      color="#B7B7B7"
+                      height="16px"
+                    >
+                      <Text
+                        position="absolute"
+                        height="fit-content"
+                        top="4px"
+                        px={4}
+                        backgroundColor="#FAF9F4"
+                        color="#b7b7b7"
+                        fontSize="14px"
+                        fontWeight="medium"
+                      >
+                        12 JAN, 2024
+                      </Text>
+                    </Flex>
+                    <Spacer mb={4} />
+                  </>
+                )}
+                <ChatOtherComponent
+                  key={chatItem.id}
+                  imageItem={chatItem.sender.image}
+                  text={chatItem.message}
+                />
+              </>
             );
           })}
         </VStack>
