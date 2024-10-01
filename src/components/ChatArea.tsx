@@ -1,4 +1,4 @@
-import { Flex, Text, Spacer } from "@chakra-ui/react";
+import { Flex, Text, Spacer, Box, HStack } from "@chakra-ui/react";
 import { ChatMessage } from "../types/types";
 import formatDate from "../utils/formatDate";
 import ChatOtherComponent from "./ChatOtherComponent";
@@ -18,7 +18,7 @@ function ChatArea({ chats }: { chats: ChatMessage[] }) {
 
     if (chatItem.sender.self) {
       return (
-        <>
+        <Box key={chatItem.id}>
           {showDateComponent && (
             <>
               <Flex
@@ -44,13 +44,14 @@ function ChatArea({ chats }: { chats: ChatMessage[] }) {
               <Spacer mb={4} />
             </>
           )}
-
-          <ChatSelfComponent key={chatItem.id} text={chatItem.message} />
-        </>
+          <HStack justify="flex-end" w={"100%"}>
+            <ChatSelfComponent chatItem={chatItem} />
+          </HStack>
+        </Box>
       );
     }
     return (
-      <>
+      <Box key={chatItem.id}>
         {showDateComponent && (
           <>
             <Flex
@@ -76,13 +77,10 @@ function ChatArea({ chats }: { chats: ChatMessage[] }) {
             <Spacer mb={4} />
           </>
         )}
-        <ChatOtherComponent
-          is_kyc_verified={chatItem.sender.is_kyc_verified}
-          key={chatItem.id}
-          imageItem={chatItem.sender.image}
-          text={chatItem.message}
-        />
-      </>
+        <HStack justify="flex-start" w={"100%"}>
+          <ChatOtherComponent chatItem={chatItem} />
+        </HStack>
+      </Box>
     );
   });
 }

@@ -1,14 +1,7 @@
 import { Box, Flex, Text, Avatar, Spacer } from "@chakra-ui/react";
+import { ChatMessage } from "../types/types";
 
-function ChatOtherComponent({
-  text,
-  imageItem,
-  is_kyc_verified,
-}: {
-  text: string;
-  imageItem: string;
-  is_kyc_verified: boolean;
-}) {
+function ChatOtherComponent({ chatItem }: { chatItem: ChatMessage }) {
   return (
     <Box alignSelf="flex-start" maxWidth="90%">
       <Flex rowGap={"6"}>
@@ -17,9 +10,9 @@ function ChatOtherComponent({
           name="Sender"
           width={"36px"}
           height={"36px"}
-          src={imageItem}
+          src={chatItem.sender.image}
         >
-          {is_kyc_verified && (
+          {chatItem.sender.is_kyc_verified && (
             <Box
               bottom={"0%"}
               color={"blue"}
@@ -50,7 +43,7 @@ function ChatOtherComponent({
         </Avatar>
         <Spacer mx={1} />
         <Box bg="white" p="2.5" rounded="12px" roundedTopLeft="0" shadow="md">
-          <Text>{text}</Text>
+          <Text>{chatItem.message}</Text>
         </Box>
       </Flex>
     </Box>

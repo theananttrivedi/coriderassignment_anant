@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
+import { ChatMessage } from "../types/types";
 
-function ChatSelfComponent({ text }: { text: string }) {
+function ChatSelfComponent({ chatItem }: { chatItem: ChatMessage }) {
   return (
     <Box
       alignSelf="flex-end"
@@ -12,7 +13,7 @@ function ChatSelfComponent({ text }: { text: string }) {
       shadow="md"
       maxWidth="90%"
     >
-      <Text>{text}</Text>
+      <Text>{chatItem.message}</Text>
     </Box>
   );
 }
