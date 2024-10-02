@@ -107,11 +107,17 @@ const AppContainer = () => {
     >
       <Topbar chatMetadata={chatMetadata} />
 
-      <Box flex="1" overflowY="auto" p="4" ref={chatContainerRef}>
+      <Box
+        flex="1"
+        width={"100%"}
+        overflowY="auto"
+        p="4"
+        ref={chatContainerRef}
+      >
         <VStack spacing={4} align="stretch">
-          <Box ref={loadingRef} height="20px" width="100%">
+          <Flex justify={"center"} ref={loadingRef} height="20px" width="100%">
             {loading && <Spinner mx={"auto"} size="lg" color="blue.500" />}
-          </Box>
+          </Flex>
           <ChatArea chats={chats} />
         </VStack>
         <Spacer h={24} />
